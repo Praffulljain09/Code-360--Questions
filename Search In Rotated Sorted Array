@@ -1,0 +1,36 @@
+int getpivot(vector<int> &arr, int size) {
+  int start = 0;
+  int end = size - 1;
+  int mid = start + (end - start) / 2;
+  while (start < end) {
+    if (arr[mid] >= arr[0]) {
+      start = mid + 1;
+    } else {
+      end = mid;
+    }
+    mid = start + (end - start) / 2;
+  }
+  return start;
+}
+int binary(vector<int> &arr, int start, int end, int key) {
+  int mid = start + (end - start) / 2;
+  while (start <= end) {
+    if (arr[mid] == key) {
+      return mid;
+    } else if (key > arr[mid]) {
+      start = mid + 1;
+    } else {
+      end = mid - 1;
+    }
+    mid = start + (end - start) / 2;
+  }
+  return -1;
+}
+int search(vector<int> &arr, int n, int k) {
+  int pivot = getpivot(arr, n);
+  if (k >= arr[pivot] && k <= arr[n - 1]) {
+    return binary(arr, pivot, n - 1, k);
+  } else {
+    return binary(arr, 0, pivot - 1, k);
+  }
+}
