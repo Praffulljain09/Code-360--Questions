@@ -1,0 +1,21 @@
+#include <bits/stdc++.h> 
+int maxOne(vector<vector<int>> &arr)
+{
+	int N=arr.size();
+	int M=arr[0].size();
+	int run=0;
+	int index=0;
+	for(int i=0; i<N; i++){
+		int count=0;
+		for(int j=0; j<M; j++){
+			if(arr[i][j]==1){
+				count++;
+			}
+		}
+		if(count>run){
+			run=count;
+			index=i;
+		}
+	}
+	return index;
+}
