@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+vector<int> reverse(vector<int> ans) {
+  int s = 0;
+  int e = ans.size() - 1;
+  while (s < e) {
+    swap(ans[s++], ans[e--]);
+  }
+  return ans;
+}
+vector<int> findArraySum(vector<int> &a, int n, vector<int> &b, int m) {
+  int sum = 0;
+  int carry = 0;
+  n = n - 1;
+  m = m - 1;
+  vector<int> ans;
+  while (n >= 0 && m >= 0) {
+    sum = a[n] + b[m] + carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ans.push_back(sum);
+    n--;
+    m--;
+  }
+  while (n >= 0) {
+    sum = a[n] + carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ans.push_back(sum);
+    n--;
+  }
+  while (m >= 0) {
+    sum = b[m] + carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ans.push_back(sum);
+    m--;
+  }
+  while (carry != 0) {
+    sum = carry;
+    carry = sum / 10;
+    sum = sum % 10;
+    ans.push_back(sum);
+  }
+  return reverse(ans);
+}
