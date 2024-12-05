@@ -1,0 +1,22 @@
+class Solution {
+  public:
+    // Function to find the maximum occurring character in a string.
+    char getMaxOccuringChar(string& s) {
+        char freq[26]={0};
+        int x=0;
+        while(s[x]!='\0'){
+            int i=s[x]-'a';
+            freq[i]++;
+            x++;
+        }
+        int max=0;
+        char c=' ';
+        for(int j=0; j<26; j++){
+            if(freq[j]>max){
+                max=freq[j];
+                c=j+'a';
+            }
+        }
+        return c;
+    }
+};
