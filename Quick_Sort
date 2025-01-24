@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+int partition(vector<int> &arr, int start, int end) {
+  int pivot = arr[start];
+  int count = 0;
+  for (int i = start + 1; i <= end; i++) {
+    if (arr[i] <= pivot) {
+      count++;
+    }
+  }
+  int pivotindex = start + count;
+  swap(arr[start], arr[pivotindex]);
+  int i = start;
+  int j = end;
+  while (i < pivotindex && j > pivotindex) {
+    while (arr[i] <= arr[pivotindex]) {
+      i++;
+    }
+    while (arr[j] > arr[pivotindex]) {
+      j--;
+    }
+    if (arr[i] > arr[pivotindex] && arr[j] < arr[pivotindex]) {
+      swap(arr[i++], arr[j--]);
+    }
+  }
+  return pivotindex;
+}
+void quick(vector<int> &arr, int start, int end) {
+  if (start >= end) {
+    return;
+  }
+  int p = partition(arr, start, end);
+  quick(arr, start, p - 1);
+  quick(arr, p + 1, end);
+}
+vector<int> quickSort(vector<int> arr) {
+  quick(arr, 0, arr.size() - 1);
+  return arr;
+}
